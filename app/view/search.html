@@ -1,0 +1,39 @@
+<h1>search</h1>
+<input type="text" ng-model="form.search" ng-focus="showResult()" ng-blur="hideResult()" ng-keyup="searchAll()"/>
+
+<table ng-show="form.showResult == 1">
+	<tr ng-show="form.recent == 1"><td class="sh-head">recent search</td></tr>
+	<tr ng-show="form.recent == 1" ng-repeat="data in result.recentKey.keywords">
+		<td colspan="2">{{data}}</td>
+	</tr>
+	<tr ng-show="form.recent == 1"><td class="sh-head">hot search</td></tr>
+	<tr ng-show="form.recent == 1" ng-repeat="data in result.hotKey.keywords">
+		<td colspan="2">{{data}}</td>
+	</tr>
+	<tr ng-show="form.recent == 1"><td class="sh-head">recently viewed item</td></tr>
+	<tr ng-show="form.recent == 1" ng-repeat="data in result.recentItem.products">
+		<td colspan="2"><img src="{{data.product_image}}" height="50px" />
+		&nbsp;{{data.product_name}}</td>
+	</tr>
+
+	<tr ng-show="form.recent == 0"><td class="sh-head">keyword: {{form.search}}</td></tr>
+	<tr ng-show="form.recent == 0" ng-repeat="data in result.auto.keywords">
+		<td>{{data.keyword}}</td>
+		<td>{{data.number}} results</td>
+	</tr>
+	<tr ng-show="form.recent == 0"><td colspan="2"><hr /></td></tr>
+	<tr ng-show="form.recent == 0" ng-repeat="data in result.cat.categories">
+		<td>{{result.cat.keyword}} in {{data.category_name}}</td>
+		<td>{{data.number}} results</td>
+	</tr>
+	<tr ng-show="form.recent == 0"><td colspan="2"><hr /></td></tr>
+	<tr ng-show="form.recent == 0"><td colspan="2" class="sh-head">Recomended for You</td></tr>
+	<tr ng-show="form.recent == 0" ng-repeat="data in result.rec.products">
+		<td colspan="2"><img src="{{data.product_image}}" height="50px" />
+		&nbsp;{{data.product_name}}</td>
+	</tr>
+</table>
+
+<style type="text/css">
+	.sh-head { font-weight: bold; }
+</style>
