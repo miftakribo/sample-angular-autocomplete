@@ -1,28 +1,28 @@
 <h1>search</h1>
-<input type="text" ng-model="form.search" ng-focus="showResult()" ng-blur="hideResult()" ng-keyup="searchAll()"/>
+<input type="text" class="sh-form" ng-model="form.search" ng-focus="showResult()" ng-blur="hideResult()" ng-keyup="searchAll()"/>
 
-<table ng-show="form.showResult == 1">
+<table ng-show="form.showResult == 1" class="sh-table-body">
 	<tr ng-show="form.recent == 1"><td class="sh-head">recent search</td></tr>
-	<tr ng-show="form.recent == 1" ng-repeat="data in result.recentKey.keywords">
+	<tr class="sh-item" ng-show="form.recent == 1" ng-repeat="data in result.recentKey.keywords">
 		<td colspan="2">{{data}}</td>
 	</tr>
 	<tr ng-show="form.recent == 1"><td class="sh-head">hot search</td></tr>
-	<tr ng-show="form.recent == 1" ng-repeat="data in result.hotKey.keywords">
+	<tr class="sh-item" ng-show="form.recent == 1" ng-repeat="data in result.hotKey.keywords">
 		<td colspan="2">{{data}}</td>
 	</tr>
 	<tr ng-show="form.recent == 1"><td class="sh-head">recently viewed item</td></tr>
-	<tr ng-show="form.recent == 1" ng-repeat="data in result.recentItem.products">
-		<td colspan="2"><img src="{{data.product_image}}" height="50px" />
-		&nbsp;{{data.product_name}}</td>
+	<tr class="sh-item" ng-show="form.recent == 1" ng-repeat="data in result.recentItem.products">
+		<td><img src="{{data.product_image}}" height="50px" /></td>
+		<td>{{data.product_name}}</td>
 	</tr>
 
 	<tr ng-show="form.recent == 0"><td class="sh-head">keyword: {{form.search}}</td></tr>
-	<tr ng-show="form.recent == 0" ng-repeat="data in result.auto.keywords">
+	<tr class="sh-item" ng-show="form.recent == 0" ng-repeat="data in result.auto.keywords">
 		<td>{{data.keyword}}</td>
 		<td>{{data.number}} results</td>
 	</tr>
 	<tr ng-show="form.recent == 0"><td colspan="2"><hr /></td></tr>
-	<tr ng-show="form.recent == 0" ng-repeat="data in result.cat.categories">
+	<tr class="sh-item" ng-show="form.recent == 0" ng-repeat="data in result.cat.categories">
 		<td>{{result.cat.keyword}} in {{data.category_name}}</td>
 		<td>{{data.number}} results</td>
 	</tr>
@@ -30,24 +30,33 @@
 	<tr ng-show="form.recent == 0"><td colspan="2" class="sh-head">Recomended for You</td></tr>
 	<tr class="sh-item" ng-show="form.recent == 0" ng-repeat="data in result.rec.products">
 		<td><img src="{{data.product_image}}" height="50px" /></td>
-		<td>test {{data.product_name}}</td>
+		<td>{{data.product_name}}</td>
 	</tr>
 </table>
 
 <style type="text/css">
 	.sh-head { font-weight: bold; }
 
-	.dropdown {
+	.sh-form {
 	    position: relative;
 	    display: inline-block;
 	}
 
-	.dropdown-content {
+	.sh-table-body {
 	    position: absolute;
 	    background-color: #f9f9f9;
 	    min-width: 160px;
 	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	    padding: 12px 16px;
+	    /*padding: 12px 16px;*/
+	}
+
+	tr.sh-item td{
+		padding: 10px;
+		height: 10px;
+		vertical-align: middle;
+	}
+	table.sh-table-body tr.sh-item:hover td{
+		background-color: #ddd;
 	}
 
 	.dropdown:hover .dropdown-content {
